@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Congreso Nacional 2026 - Comunità Magnificat</title>
+    <style>
+        :root {
+            --marron-oscuro: #4a3728; 
+            --marron-claro: #8b6b4a;
+            --celeste: #74acdf; 
+            --dorado: #f6b40e; 
+            --blanco: #ffffff;
+            --fondo: #f9f6f0; 
+        }
+        
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--fondo); color: #333; }
+        header { background-color: var(--marron-oscuro); color: var(--blanco); text-align: center; padding: 25px 15px; border-bottom: 5px solid var(--dorado); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
+        header h2 { margin: 8px 0 0 0; font-size: 1.2rem; font-weight: 300; font-style: italic; color: var(--dorado); }
+        
+        .tabs { display: flex; background-color: var(--marron-claro); position: sticky; top: 0; z-index: 100; }
+        .tab-button { flex: 1; padding: 15px; border: none; background: none; color: var(--blanco); font-size: 16px; font-weight: bold; cursor: pointer; border-bottom: 4px solid transparent; transition: all 0.3s; }
+        .tab-button.active { background-color: var(--marron-oscuro); border-bottom: 4px solid var(--celeste); }
+        
+        .content { display: none; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .content.active { display: block; }
+
+        /* Estilos Cronograma */
+        .dia-titulo { color: var(--celeste); border-bottom: 2px solid var(--dorado); padding-bottom: 5px; margin-top: 30px; font-size: 1.3rem; }
+        .evento { background: var(--blanco); padding: 15px; margin-bottom: 10px; border-left: 4px solid var(--marron-claro); border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; }
+        .evento .hora { font-weight: bold; color: var(--marron-oscuro); min-width: 55px; font-size: 1.1rem; }
+
+        /* Estilos Adoración Info */
+        .guardia-info { background-color: #e8f4fd; border: 1px solid var(--celeste); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5; color: var(--marron-oscuro); }
+        
+        /* Estilos Tarjetas de Turnos (App) */
+        .turno-card { background: var(--blanco); margin-bottom: 15px; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 6px solid; transition: all 0.3s ease; }
+        .borde-rojo { border-left-color: #e74c3c; }
+        .borde-verde { border-left-color: #2ecc71; }
+        .borde-gris { border-left-color: #95a5a6; opacity: 0.7; }
+        
+        .turno-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px; }
+        .turno-hora { font-size: 1.3rem; font-weight: bold; color: var(--marron-oscuro); }
+        .turno-estado { font-size: 0.9rem; font-weight: 600; color: #555; }
+        
+        .lista-nombres { list-style-type: none; padding: 0; margin: 0 0 15px 0; }
+        .lista-nombres li { background: #f9f9f9; padding: 8px 12px; margin-bottom: 5px; border-radius: 4px; font-size: 0.95rem; border-left: 2px solid var(--dorado); color: var(--marron-oscuro); font-weight: 500;}
+        
+        .formulario-anotar { display: flex; gap: 10px; }
+        .formulario-anotar input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; font-size: 16px;}
+        .formulario-anotar button { padding: 12px 20px; background-color: var(--celeste); color: var(--blanco); border: none; border-radius: 4px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s; }
+        .formulario-anotar button:hover { background-color: var(--marron-oscuro); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>1º Congreso Nacional 2026</h1>
+        <h2>"No lleven dos túnicas"</h2>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="cambiarPestana('cronograma')">Programa</button>
+        <button class="tab-button" onclick="cambiarPestana('guardia')">Adoración</button>
+    </div>
+
+    <div id="cronograma" class="content active">
+        <h2 class="dia-titulo">VIERNES — Día 1</h2>
+        <div class="evento"><span class="hora">14:00</span><span>Acreditación</span></div>
+        <div class="evento"><span class="hora">14:45</span><span>Acogida</span></div>
+        <div class="evento"><span class="hora">15:00</span><span>Presentación del congreso</span></div>
+        <div class="evento"><span class="hora">16:00</span><span>Santa Misa</span></div>
+        <div class="evento"><span class="hora">17:15</span><span>Pausa de 30 minutos</span></div>
+        <div class="evento"><span class="hora">17:45</span><span>Primera catequesis</span></div>
+        <div class="evento"><span class="hora">19:00</span><span>Comunicaciones: Stands - Saludos de otras fraternidades</span></div>
+        <div class="evento"><span class="hora">20:30</span><span>Cena</span></div>
+        <div class="evento" style="border-left-color: var(--celeste); background-color: #f0f7fc;"><span class="hora">22:00</span><span>Adoración nocturna por turnos</span></div>
+
+        <h2 class="dia-titulo">SÁBADO — Día 2</h2>
+        <div class="evento"><span class="hora">08:00</span><span>Desayuno</span></div>
+        <div class="evento"><span class="hora">09:00</span><span>Oración comunitaria</span></div>
+        <div class="evento"><span class="hora">10:00</span><span>Segunda catequesis</span></div>
+        <div class="evento"><span class="hora">11:15</span><span>Pausa</span></div>
+        <div class="evento"><span class="hora">11:45</span><span>Santa Misa</span></div>
+        <div class="evento"><span class="hora">13:00</span><span>Almuerzo</span></div>
+        <div class="evento"><span class="hora">15:15</span><span>Invocación al Espíritu Santo</span></div>
+        <div class="evento"><span class="hora">15:30</span><span>Testimonio sobre Tarcisio Mezzetti</span></div>
+        <div class="evento"><span class="hora">16:30</span><span>Adoración a Jesús Eucaristía movidos por el Espíritu</span></div>
+        <div class="evento"><span class="hora">17:30</span><span>Pausa</span></div>
+        <div class="evento"><span class="hora">18:00</span><span>Comunicaciones: Fundación “Operazione Fratellino” - Editorial</span></div>
+        <div class="evento"><span class="hora">20:00</span><span>Cena</span></div>
+        <div class="evento"><span class="hora">21:30</span><span>Oración por los hermanos</span></div>
+
+        <h2 class="dia-titulo">DOMINGO — Día 3</h2>
+        <div class="evento"><span class="hora">08:00</span><span>Desayuno</span></div>
+        <div class="evento"><span class="hora">09:00</span><span>Oración comunitaria</span></div>
+        <div class="evento"><span class="hora">10:00</span><span>Tercera catequesis</span></div>
+        <div class="evento"><span class="hora">11:45</span><span>Pausa</span></div>
+        <div class="evento"><span class="hora">12:00</span><span>Santa Misa</span></div>
+        <div class="evento"><span class="hora">13:30</span><span>Almuerzo y despedida</span></div>
+    </div>
+
+    <div id="guardia" class="content">
+        <div class="guardia-info">
+            <strong>Adoración Eucarística Nocturna</strong><br>
+            De 22:00 a 08:00 hs. Cada turno es de 30 minutos (se sugiere cubrir un mínimo de 1 hora).
+            <br><br>
+            🔴 Faltan adoradores (Mínimo 2)<br>
+            🟢 Turno cubierto (Aún hay cupo)<br>
+            ⚪ Turno lleno (Máximo 6)
+        </div>
+        
+        <div id="contenedor-turnos">
+            <i>Conectando con la base de datos...</i>
+        </div> 
+    </div>
+
+    <script>
+        function cambiarPestana(id) {
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+        // 1. Tu configuración exacta de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDqTccQHV8E9_gMYGl_eooF2VfYZEQIHrA",
+            authDomain: "congreso2026-cmarg.firebaseapp.com",
+            databaseURL: "https://congreso2026-cmarg-default-rtdb.firebaseio.com",
+            projectId: "congreso2026-cmarg",
+            storageBucket: "congreso2026-cmarg.firebasestorage.app",
+            messagingSenderId: "166480582384",
+            appId: "1:166480582384:web:401b12e322c06803485435"
+        };
+
+        // 2. Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // 3. Los horarios fijos
+        const horarios = [
+            "22:00", "22:30", "23:00", "23:30",
+            "00:00", "00:30", "01:00", "01:30",
+            "02:00", "02:30", "03:00", "03:30",
+            "04:00", "04:30", "05:00", "05:30",
+            "06:00", "06:30", "07:00", "07:30"
+        ];
+
+        const contenedorTurnos = document.getElementById('contenedor-turnos');
+
+        // 4. Leer datos en tiempo real y dibujar las tarjetas
+        db.ref('adoracion_nocturna').on('value', (snapshot) => {
+            const datos = snapshot.val() || {};
+            contenedorTurnos.innerHTML = ''; // Limpiar para redibujar
+
+            horarios.forEach((hora, index) => {
+                const anotadosObj = datos[hora] || {};
+                const anotadosArray = Object.values(anotadosObj);
+                const cantidad = anotadosArray.length;
+
+                // Lógica de colores y alertas (Mínimo 2, Máximo 6)
+                let colorAlerta = "🔴";
+                let claseBorde = "borde-rojo";
+                let textoEstado = "Falta cubrir";
+
+                if (cantidad >= 2 && cantidad < 6) {
+                    colorAlerta = "🟢";
+                    claseBorde = "borde-verde";
+                    textoEstado = "Cubierto";
+                } else if (cantidad >= 6) {
+                    colorAlerta = "⚪";
+                    claseBorde = "borde-gris";
+                    textoEstado = "Lleno";
+                }
+
+                // Crear la tarjeta
+                const divTurno = document.createElement('div');
+                divTurno.className = `turno-card ${claseBorde}`;
+                
+                let htmlTurno = `
+                    <div class="turno-header">
+                        <span class="turno-hora">${hora}</span>
+                        <span class="turno-estado">${colorAlerta} ${cantidad}/6 - ${textoEstado}</span>
+                    </div>
+                    <ul class="lista-nombres">
+                        ${anotadosArray.map(nombre => `<li>${nombre}</li>`).join('')}
+                    </ul>
+                `;
+
+                // Solo mostrar la caja para anotar si hay menos de 6
+                if (cantidad < 6) {
+                    htmlTurno += `
+                        <div class="formulario-anotar">
+                            <input type="text" id="input-${index}" placeholder="Tu Nombre y Apellido" autocomplete="off">
+                            <button onclick="anotarPersona('${hora}', ${index})">Anotarme</button>
+                        </div>
+                    `;
+                }
+
+                divTurno.innerHTML = htmlTurno;
+                contenedorTurnos.appendChild(divTurno);
+            });
+        });
+
+        // 5. Guardar en la base de datos al hacer clic
+        window.anotarPersona = function(hora, index) {
+            const input = document.getElementById(`input-${index}`);
+            const nombre = input.value.trim();
+
+            if (nombre === "") {
+                alert("Por favor, escribe tu nombre antes de presionar el botón.");
+                return;
+            }
+
+            // Validar que no se hayan pasado de 6 mientras escribía
+            db.ref(`adoracion_nocturna/${hora}`).once('value').then((snapshot) => {
+                if (snapshot.numChildren() < 6) {
+                    db.ref(`adoracion_nocturna/${hora}`).push(nombre);
+                } else {
+                    alert("Lo sentimos, alguien se anotó un segundo antes y este turno ya se llenó.");
+                }
+            });
+        };
+    </script>
+</body>
+</html>
