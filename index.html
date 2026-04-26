@@ -82,7 +82,7 @@
         <div class="evento"><span class="hora">09:00</span><span>Oración comunitaria</span></div>
         <div class="evento"><span class="hora">10:00</span><span>Segunda catequesis</span></div>
         <div class="evento"><span class="hora">11:15</span><span>Pausa</span></div>
-        <div class="evento"><span class="hora">11:45</span><span>Santa Misa</span></div>
+        <div class="evento"><span class="hora">12:00</span><span>Santa Misa</span></div>
         <div class="evento"><span class="hora">13:00</span><span>Almuerzo</span></div>
         <div class="evento"><span class="hora">15:15</span><span>Invocación al Espíritu Santo</span></div>
         <div class="evento"><span class="hora">15:30</span><span>Testimonio sobre Tarcisio Mezzetti</span></div>
@@ -96,6 +96,7 @@
         <div class="evento"><span class="hora">08:00</span><span>Desayuno</span></div>
         <div class="evento"><span class="hora">09:00</span><span>Oración comunitaria</span></div>
         <div class="evento"><span class="hora">10:00</span><span>Tercera catequesis</span></div>
+        <div class="evento"><span class="hora">11:15</span><span>Compartir</span></div>
         <div class="evento"><span class="hora">11:45</span><span>Pausa</span></div>
         <div class="evento"><span class="hora">12:00</span><span>Santa Misa</span></div>
         <div class="evento"><span class="hora">13:30</span><span>Almuerzo y despedida</span></div>
@@ -166,7 +167,7 @@
                 const anotadosArray = Object.values(anotadosObj);
                 const cantidad = anotadosArray.length;
 
-                // Lógica de colores y alertas (Mínimo 2, Máximo 6)
+                // Lógica de colores y alertas (Mínimo 2, Máximo 3)
                 let colorAlerta = "🔴";
                 let claseBorde = "borde-rojo";
                 let textoEstado = "Falta cubrir";
@@ -188,7 +189,7 @@
                 let htmlTurno = `
                     <div class="turno-header">
                         <span class="turno-hora">${hora}</span>
-                        <span class="turno-estado">${colorAlerta} ${cantidad}/6 - ${textoEstado}</span>
+                        <span class="turno-estado">${colorAlerta} ${cantidad}/3 - ${textoEstado}</span>
                     </div>
                     <ul class="lista-nombres">
                         ${anotadosArray.map(nombre => `<li>${nombre}</li>`).join('')}
