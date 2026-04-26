@@ -108,7 +108,7 @@
             <br><br>
             🔴 Faltan adoradores (Mínimo 2)<br>
             🟢 Turno cubierto (Aún hay cupo)<br>
-            ⚪ Turno lleno (Máximo 6)
+            ⚪ Turno lleno (Máximo 3)
         </div>
         
         <div id="contenedor-turnos">
@@ -171,11 +171,11 @@
                 let claseBorde = "borde-rojo";
                 let textoEstado = "Falta cubrir";
 
-                if (cantidad >= 2 && cantidad < 6) {
+                if (cantidad >= 2 && cantidad < 3) {
                     colorAlerta = "🟢";
                     claseBorde = "borde-verde";
                     textoEstado = "Cubierto";
-                } else if (cantidad >= 6) {
+                } else if (cantidad >= 3) {
                     colorAlerta = "⚪";
                     claseBorde = "borde-gris";
                     textoEstado = "Lleno";
@@ -196,7 +196,7 @@
                 `;
 
                 // Solo mostrar la caja para anotar si hay menos de 6
-                if (cantidad < 6) {
+                if (cantidad < 3) {
                     htmlTurno += `
                         <div class="formulario-anotar">
                             <input type="text" id="input-${index}" placeholder="Tu Nombre y Apellido" autocomplete="off">
@@ -222,7 +222,7 @@
 
             // Validar que no se hayan pasado de 6 mientras escribía
             db.ref(`adoracion_nocturna/${hora}`).once('value').then((snapshot) => {
-                if (snapshot.numChildren() < 6) {
+                if (snapshot.numChildren() < 3) {
                     db.ref(`adoracion_nocturna/${hora}`).push(nombre);
                 } else {
                     alert("Lo sentimos, alguien se anotó un segundo antes y este turno ya se llenó.");
